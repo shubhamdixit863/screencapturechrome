@@ -103,15 +103,13 @@ function handleSignoutClick() {
 /**
  * Upload file to Google Drive.
  */
- async function uploadFile(fileContent) {
+ async function uploadFile(recordedChunks) {
 	//var fileContent = 'Hello World'; // As a sample, upload a text file.
-	var file = new Blob([fileContent], { type: 'video/mp4' });
-	let metadata = {
-		'name': 'video', // Filename at Google Drive
-		'mimeType': 'video/mp4', // mimeType at Google Drive
-		
-		// Note: remove this parameter, if no target is needed
-		'parents': ['SET-GOOGLE-DRIVE-FOLDER-ID'], // Folder ID at Google Drive which is optional
+	const file = new Blob(recordedChunks, { type: 'video/mp4' }); // recordedChunks is assumed to be an array of video chunks
+	const metadata = {
+	  'name': 'sample-video.mp4', // file name
+	  'mimeType': 'video/mp4', // file MIME type
+	  'parents': ['SET-GOOGLE-DRIVE-FOLDER-ID'], // optional: folder ID to upload the file to
 	};
 
 	var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
@@ -183,10 +181,7 @@ function createRecorder (stream, mimeType) {
 
 async function saveFile(recordedChunks){
 
-   const blob = new Blob(recordedChunks, {
-      type: 'video/mp4'
-    });
-    await uploadFile(blob);
+    await uploadFile(recordedChunks);
     /*
     let filename = window.prompt('Enter file name'),
         downloadLink = document.createElement('a');
