@@ -119,7 +119,7 @@ async function uploadFile(fileContent) {
 	};
   
 
-	let  accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
+	let  accessToken = localStorage.getItem("token");//gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
 	let  form = new FormData();
 	form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
 	form.append('file', file);
