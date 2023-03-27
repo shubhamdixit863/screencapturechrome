@@ -103,9 +103,11 @@ function handleSignoutClick() {
 /**
  * Upload file to Google Drive.
  */
- async function uploadFile(recordedChunks) {
+ async function uploadFile(myBlob) {
+	var file = new File([myBlob], "video.mp4");
+
 	//var fileContent = 'Hello World'; // As a sample, upload a text file.
-	const file = new Blob(recordedChunks, { type: 'video/mp4' }); // recordedChunks is assumed to be an array of video chunks
+	//const file = new Blob(recordedChunks, { type: 'video/mp4' }); // recordedChunks is assumed to be an array of video chunks
 	const metadata = {
 	  'name': 'sample-video.mp4', // file name
 	  'mimeType': 'video/mp4', // file MIME type
@@ -118,7 +120,7 @@ function handleSignoutClick() {
 	form.append('file', file);
 
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable&upload_id=xa298sd_sdlkj2');
+	xhr.open('POST', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=media&upload_id=xa298sd_sdlkj2');
 	xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
 	
 	xhr.responseType = 'json';
@@ -179,8 +181,11 @@ function createRecorder (stream, mimeType) {
 
 async function saveFile(recordedChunks){
 
-    await uploadFile(recordedChunks);
-    /*
+   const blob = new Blob(recordedChunks, {
+      type: 'video/mp4'
+    });
+    await uploadFile(blob);
+    
     let filename = window.prompt('Enter file name'),
         downloadLink = document.createElement('a');
     downloadLink.href = URL.createObjectURL(blob);
@@ -190,5 +195,5 @@ async function saveFile(recordedChunks){
     downloadLink.click();
     URL.revokeObjectURL(blob); // clear from memory
     document.body.removeChild(downloadLink);
-    */
+    
 }
