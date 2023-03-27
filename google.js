@@ -100,7 +100,7 @@ function handleSignoutClick() {
 /**
  * Upload file to Google Drive.
  */
-export async function uploadFile(fileContent) {
+ async function uploadFile(fileContent) {
 	//var fileContent = 'Hello World'; // As a sample, upload a text file.
 	var file = new Blob([fileContent], { type: 'video/mp4' });
 	var metadata = {
