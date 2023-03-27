@@ -104,30 +104,25 @@ function handleSignoutClick() {
  * Upload file to Google Drive.
  */
  async function uploadFile(myBlob) {
-	var file = new File([myBlob], "video.mp4");
+	//var file = new File([myBlob], "video.mp4");
 
 	//var fileContent = 'Hello World'; // As a sample, upload a text file.
 	//const file = new Blob(recordedChunks, { type: 'video/mp4' }); // recordedChunks is assumed to be an array of video chunks
 	const metadata = {
-	  'name': 'sample-video.mp4', // file name
-	  'mimeType': 'video/mp4', // file MIME type
+		name: Date.now() + '.mp4',// file name
+	  mimeType: 'video/mp4', // file MIME type
 	  'parents': ['SET-GOOGLE-DRIVE-FOLDER-ID'], // optional: folder ID to upload the file to
 	};
 
 	var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
 	var form = new FormData();
-	form.append('metadata', metadata, {type: 'application/json' }));
-	form.append('file', file);
+	form.append('metadata', new Blob([JSON.stringify(metadata)], {type: 'application/json' }));
+	form.append('file', myBlob);
 
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=media&upload_id=xa298sd_sdlkj2');
+	xhr.open('POST', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id');
 	xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-	
 	xhr.responseType = 'json';
-	xhr.onload = () => {
-		document.getElementById('content').innerHTML = "File uploaded successfully. The Google Drive file id is <b>" + xhr.response.id + "</b>";
-		document.getElementById('content').style.display = 'block';
-	};
 	xhr.send(form);
 }
 
