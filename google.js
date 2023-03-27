@@ -77,12 +77,14 @@ async function handleAuthClick() {
 		// Prompt the user to select a Google Account and ask for consent to share their data
 		// when establishing a new session.
 		await tokenClient.requestAccessToken({ prompt: 'consent' });
+		localStorage.setItem('googleToken', JSON.stringify(gapi.auth.getToken()));
+
 	  } else {
 		// Skip display of account chooser and consent dialog for an existing session.
 		await tokenClient.requestAccessToken({ prompt: '' });
+		localStorage.setItem('googleToken', JSON.stringify(gapi.auth.getToken()));
+
 	  }
-	  console.log(token);
-	  localStorage.setItem('googleToken', JSON.stringify(gapi.auth.getToken()));
 	 // document.getElementById('signout_button').style.visibility = 'visible';
 	 // document.getElementById('authorize_button').value = 'Refresh';
 	
