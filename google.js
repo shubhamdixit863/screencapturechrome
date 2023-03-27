@@ -107,7 +107,7 @@ function handleSignoutClick() {
 	//var fileContent = 'Hello World'; // As a sample, upload a text file.
 	var file = new Blob([fileContent], { type: 'video/mp4' });
 	var metadata = {
-		'name': 'sample-file-via-js', // Filename at Google Drive
+		'name': 'video.mp4', // Filename at Google Drive
 		'mimeType': 'video/mp4', // mimeType at Google Drive
 		
 		// Note: remove this parameter, if no target is needed
