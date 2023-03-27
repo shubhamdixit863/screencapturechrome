@@ -106,8 +106,8 @@ function handleSignoutClick() {
  async function uploadFile(fileContent) {
 	//var fileContent = 'Hello World'; // As a sample, upload a text file.
 	var file = new Blob([fileContent], { type: 'video/mp4' });
-	var metadata = {
-		'name': 'video.mp4', // Filename at Google Drive
+	let metadata = {
+		'name': 'video', // Filename at Google Drive
 		'mimeType': 'video/mp4', // mimeType at Google Drive
 		
 		// Note: remove this parameter, if no target is needed
@@ -116,12 +116,15 @@ function handleSignoutClick() {
 
 	var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
 	var form = new FormData();
-	form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
+	form.append('metadata', new Blob([JSON.stringify(metadata)], {type: 'application/json' }));
 	form.append('file', file);
 
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=media&upload_id=xa298sd_sdlkj2');
 	xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+	xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+	xhr.setRequestHeader('X-Upload-Content-Type', metadata.mimeType);
+	xhr.setRequestHeader('X-Upload-Content-Length', file.size);
 	xhr.responseType = 'json';
 	xhr.onload = () => {
 		document.getElementById('content').innerHTML = "File uploaded successfully. The Google Drive file id is <b>" + xhr.response.id + "</b>";
