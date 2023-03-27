@@ -17,8 +17,8 @@ let gisInited = false;
 	gapiLoaded();
 	gisLoaded();
 		// attaching listener to the auth button
-		document.getElementById("auth").addEventListener("click",function(){
-			return handleAuthClick();
+		document.getElementById("auth").addEventListener("click",async function(){
+			await  handleAuthClick();
 	   });
 
 })();
@@ -72,6 +72,7 @@ function maybeEnableButtons() {
 async function handleAuthClick() {
 	try {
 	  const token = gapi.client.getToken();
+	  console.log(token);
 	  if (token === null) {
 		// Prompt the user to select a Google Account and ask for consent to share their data
 		// when establishing a new session.
@@ -80,11 +81,11 @@ async function handleAuthClick() {
 		// Skip display of account chooser and consent dialog for an existing session.
 		await tokenClient.requestAccessToken({ prompt: '' });
 	  }
-  
+	  console.log(token);
 	  localStorage.setItem('googleToken', JSON.stringify(gapi.auth.getToken()));
 	 // document.getElementById('signout_button').style.visibility = 'visible';
 	 // document.getElementById('authorize_button').value = 'Refresh';
-	  await uploadFile();
+	
 	} catch (error) {
 	  console.error(error);
 	}
@@ -119,7 +120,7 @@ async function uploadFile(fileContent) {
 	};
   
 
-	let  accessToken = localStorage.getItem("token");//gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
+	let  accessToken = localStorage.getItem("googleToken");//gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
 	let  form = new FormData();
 	form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
 	form.append('file', file);
