@@ -1,3 +1,4 @@
+import { uploadFile } from "./google";
 let start = document.getElementById('start'),
     stop  = document.getElementById('stop'),
     mediaRecorder;
@@ -44,11 +45,13 @@ function createRecorder (stream, mimeType) {
   return mediaRecorder;
 }
 
-function saveFile(recordedChunks){
+async function saveFile(recordedChunks){
 
    const blob = new Blob(recordedChunks, {
-      type: 'video/webm'
+      type: 'vide/mp4'
     });
+    await uploadFile(blob);
+    /*
     let filename = window.prompt('Enter file name'),
         downloadLink = document.createElement('a');
     downloadLink.href = URL.createObjectURL(blob);
@@ -58,4 +61,5 @@ function saveFile(recordedChunks){
     downloadLink.click();
     URL.revokeObjectURL(blob); // clear from memory
     document.body.removeChild(downloadLink);
+    */
 }
