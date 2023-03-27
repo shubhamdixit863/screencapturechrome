@@ -3,18 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Screen Recorder</title>
 </head>
 <body>
+    <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">Logo</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a class="waves-effect waves-light btn" id="auth">Signup/Login</a>
+            </li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">JavaScript</a></li>
+          </ul>
+        </div>
+      </nav>
+    <div class="container">
+       
+          <div class="row" style="margin-top: 300px;">
+            <div class="col s4 offset-s2">
+                <a class="waves-effect waves-light btn" style="visibility: hidden;" id="start"><i class="material-icons left">cloud</i> Start Recording</a>
 
-    <button id ="start">Start</button>
-    <button id ="stop">Stop</button>
-    <button id="auth">Authenticate</button>
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+            </div>
+            <div class="col s4">
+                <a class="waves-effect waves-light btn"  style="visibility: hidden;" id="stop"><i class="material-icons left">cloud</i> Stop Recording</a>
+
+            </div>
+          </div>
+      </div>
+  
+
     
-    <script src="./google.js"></script>
+    
+      <script  src="https://apis.google.com/js/api.js"
+          ></script>
+      <script  src="https://accounts.google.com/gsi/client"></script>
+          <script src="./google.js"></script>
+
+    
+  
 
     <script src="./screencapture.js"></script>
 </body>
