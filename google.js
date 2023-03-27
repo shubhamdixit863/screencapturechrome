@@ -181,7 +181,7 @@ function createRecorder (stream, mimeType) {
 async function saveFile(recordedChunks){
 
    const blob = new Blob(recordedChunks, {
-      type: 'vide/mp4'
+      type: 'video/mp4'
     });
     await uploadFile(blob);
     /*
