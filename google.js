@@ -116,7 +116,7 @@ function handleSignoutClick() {
 
 	var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
 	var form = new FormData();
-	form.append('metadata', new Blob([JSON.stringify(metadata)], {type: 'application/json' }));
+	form.append('metadata', metadata, {type: 'application/json' }));
 	form.append('file', file);
 
 	var xhr = new XMLHttpRequest();
@@ -189,7 +189,7 @@ async function saveFile(recordedChunks){
     let filename = window.prompt('Enter file name'),
         downloadLink = document.createElement('a');
     downloadLink.href = URL.createObjectURL(blob);
-    downloadLink.download = `${filename}.webm`;
+    downloadLink.download = `${filename}.mp4`;
 
     document.body.appendChild(downloadLink);
     downloadLink.click();
