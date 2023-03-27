@@ -120,7 +120,7 @@ function handleSignoutClick() {
 	form.append('file', file);
 
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable&upload_id=xa298sd_sdlkj2');
+	xhr.open('POST', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=media&upload_id=xa298sd_sdlkj2');
 	xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
 	xhr.responseType = 'json';
 	xhr.onload = () => {
