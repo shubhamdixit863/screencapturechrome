@@ -120,9 +120,7 @@ function handleSignoutClick() {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=media&upload_id=xa298sd_sdlkj2');
 	xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-	xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-	xhr.setRequestHeader('X-Upload-Content-Type', metadata.mimeType);
-	xhr.setRequestHeader('X-Upload-Content-Length', file.size);
+	
 	xhr.responseType = 'json';
 	xhr.onload = () => {
 		document.getElementById('content').innerHTML = "File uploaded successfully. The Google Drive file id is <b>" + xhr.response.id + "</b>";
