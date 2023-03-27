@@ -13,6 +13,9 @@ let gisInited = false;
 //document.getElementById('authorize_button').style.visibility = 'hidden';
 //document.getElementById('signout_button').style.visibility = 'hidden';
 
+document.getElementById("auth").addEventListener("click",function(){
+	handleAuthClick();
+})
 /**
  * Callback after api.js is loaded.
  */
